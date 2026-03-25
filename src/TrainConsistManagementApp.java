@@ -1,11 +1,9 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 public class TrainConsistManagementApp {
 
-    // Bogie class (reused from UC7/UC8)
+    // Bogie class (reused from UC7–UC9)
     static class Bogie {
         String name;
         int capacity;
@@ -30,25 +28,22 @@ public class TrainConsistManagementApp {
         passengerBogies.add(new Bogie("Sleeper", 72));
         passengerBogies.add(new Bogie("AC Chair", 50));
         passengerBogies.add(new Bogie("First Class", 24));
-        passengerBogies.add(new Bogie("Sleeper", 72)); // duplicate type
         passengerBogies.add(new Bogie("Executive", 80));
 
         // Display original list
-        System.out.println("\nOriginal Passenger Bogies:");
+        System.out.println("\nPassenger Bogies:");
         System.out.println(passengerBogies);
 
-        // Group bogies by type (name)
-        Map<String, List<Bogie>> groupedBogies = passengerBogies.stream()
-                .collect(Collectors.groupingBy(b -> b.name));
+        // Calculate total seating capacity using map + reduce
+        int totalSeats = passengerBogies.stream()
+                .map(b -> b.capacity)           // Extract capacities
+                .reduce(0, Integer::sum);       // Sum capacities
 
-        // Display grouped bogies
-        System.out.println("\nGrouped Passenger Bogies by Type:");
-        groupedBogies.forEach((type, bogies) -> {
-            System.out.println(type + " -> " + bogies);
-        });
+        // Display total seating capacity
+        System.out.println("\nTotal Seating Capacity of Train: " + totalSeats + " seats");
 
         // Verify original list remains unchanged
-        System.out.println("\nOriginal list after grouping (unchanged):");
+        System.out.println("\nOriginal list after aggregation (unchanged):");
         System.out.println(passengerBogies);
     }
-}gi
+}
