@@ -1,35 +1,29 @@
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
-
-class GoodsBogie {
-    String type; // "Cylindrical" or "Box"
-    String cargo;
-
-    GoodsBogie(String type, String cargo) {
-        this.type = type;
-        this.cargo = cargo;
-    }
-}
 
 public class TrainConsistManagementApp {
     public static void main(String[] args) {
-        System.out.println("========================================");
-        System.out.println(" UC12 - Safety Compliance Check ");
-        System.out.println("========================================\n");
+        System.out.println("--- UC13: Performance Comparison ---\n");
 
-        List<GoodsBogie> train = Arrays.asList(
-                new GoodsBogie("Cylindrical", "Petroleum"),
-                new GoodsBogie("Box", "Coal"),
-                new GoodsBogie("Cylindrical", "Petroleum")
-        );
+        List<Integer> capacities = new ArrayList<>();
+        for (int i = 0; i < 100000; i++) capacities.add((int) (Math.random() * 100));
 
-        // Safety Rule: If type is Cylindrical, cargo MUST be Petroleum
-        boolean isSafe = train.stream().allMatch(b ->
-                !(b.type.equals("Cylindrical")) || b.cargo.equals("Petroleum")
-        );
+        // 1. Loop Performance
+        long startLoop = System.nanoTime();
+        List<Integer> filteredLoop = new ArrayList<>();
+        for (int c : capacities) {
+            if (c > 60) filteredLoop.add(c);
+        }
+        long endLoop = System.nanoTime();
 
-        System.out.println("Is the train formation safe? " + (isSafe ? "YES" : "NO"));
+        // 2. Stream Performance
+        long startStream = System.nanoTime();
+        long count = capacities.stream().filter(c -> c > 60).count();
+        long endStream = System.nanoTime();
 
-        System.out.println("\nUC12 safety validation completed...");
+        System.out.println("Loop Time: " + (endLoop - startLoop) + " ns");
+        System.out.println("Stream Time: " + (endStream - startStream) + " ns");
+
+        System.out.println("\nUC13 benchmarking completed...");
     }
 }
