@@ -1,14 +1,17 @@
-import java.util.Arrays;
-
 public class TrainConsistManagementApp {
+    public static boolean linearSearch(String[] arr, String key) {
+        for (String id : arr) {
+            if (id.equals(key)) return true;
+        }
+        return false;
+    }
+
     public static void main(String[] args) {
-        System.out.println("--- UC17: Optimized Built-in Sorting ---\n");
-        String[] bogieTypes = {"Sleeper", "AC Chair", "First Class", "General", "Luxury"};
+        System.out.println("--- UC18: Linear Search (O(n)) ---\n");
+        String[] bogies = {"BG101", "BG205", "BG309", "BG412", "BG550"};
+        String target = "BG309";
 
-        System.out.println("Original: " + Arrays.toString(bogieTypes));
-
-        Arrays.sort(bogieTypes);
-
-        System.out.println("Alphabetical Order: " + Arrays.toString(bogieTypes));
+        boolean found = linearSearch(bogies, target);
+        System.out.println("Searching for " + target + "... Found: " + found);
     }
 }
