@@ -1,49 +1,41 @@
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * =========================================================
+ * MAIN CLASS - UseCase1TrainConsistMgmnt
+ * =========================================================
+ * * Description:
+ * This class represents the entry point of the Train Consist
+ * Management Application.
+ * * At this stage, the application:
+ * - Creates an empty train consist
+ * - Uses a dynamic List to store bogies
+ * - Displays initial bogie count
+ * - Prints the current state of the train
+ */
 public class TrainConsistManagementApp {
-
-    // Bogie class (reused from UC7–UC9)
-    static class Bogie {
-        String name;
-        int capacity;
-
-        Bogie(String name, int capacity) {
-            this.name = name;
-            this.capacity = capacity;
-        }
-
-        @Override
-        public String toString() {
-            return name + " (" + capacity + " seats)";
-        }
-    }
 
     public static void main(String[] args) {
 
-        System.out.println("=== Train Consist Management App ===");
+        // Display welcome banner [cite: 12, 33]
+        System.out.println("=============================================");
+        System.out.println(" === Train Consist Management App === ");
+        System.out.println("=============================================\n");
 
-        // Create list of passenger bogies
-        List<Bogie> passengerBogies = new ArrayList<>();
-        passengerBogies.add(new Bogie("Sleeper", 72));
-        passengerBogies.add(new Bogie("AC Chair", 50));
-        passengerBogies.add(new Bogie("First Class", 24));
-        passengerBogies.add(new Bogie("Executive", 80));
+        // Create a dynamic list to store train bogies [cite: 12, 25, 34]
+        // We use the List interface for abstraction and ArrayList for dynamic sizing [cite: 26, 27]
+        List<String> trainConsist = new ArrayList<>();
 
-        // Display original list
-        System.out.println("\nPassenger Bogies:");
-        System.out.println(passengerBogies);
+        // Display initial consist information [cite: 12, 18]
+        System.out.println("Train initialized successfully...");
 
-        // Calculate total seating capacity using map + reduce
-        int totalSeats = passengerBogies.stream()
-                .map(b -> b.capacity)           // Extract capacities
-                .reduce(0, Integer::sum);       // Sum capacities
+        // Display the initial bogie count using the size() method [cite: 35]
+        System.out.println("Initial Bogie Count : " + trainConsist.size());
 
-        // Display total seating capacity
-        System.out.println("\nTotal Seating Capacity of Train: " + totalSeats + " seats");
+        // Print the current state of the train (empty list) [cite: 11, 41]
+        System.out.println("Current Train Consist : " + trainConsist);
 
-        // Verify original list remains unchanged
-        System.out.println("\nOriginal list after aggregation (unchanged):");
-        System.out.println(passengerBogies);
+        System.out.println("\nSystem ready for operations...");
     }
 }
