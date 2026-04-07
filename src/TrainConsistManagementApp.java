@@ -1,22 +1,29 @@
-import java.util.Arrays;
-import java.util.List;
+import java.util.regex.Pattern;
 
 public class TrainConsistManagementApp {
     public static void main(String[] args) {
         System.out.println("========================================");
-        System.out.println(" UC10 - Count Total Seats ");
+        System.out.println(" UC11 - Validate Train ID & Cargo Codes ");
         System.out.println("========================================\n");
 
-        // List representing seat capacities of various bogies
-        List<Integer> capacities = Arrays.asList(72, 54, 24, 72, 64);
+        // Regex Patterns
+        // TRN- followed by exactly 4 digits
+        String trainIdPattern = "^TRN-\\d{4}$";
+        // 3 Uppercase letters, hyphen, 2 Uppercase letters
+        String cargoCodePattern = "^[A-Z]{3}-[A-Z]{2}$";
 
-        // Use reduce to calculate the sum of all capacities
-        int totalSeats = capacities.stream()
-                .reduce(0, (sum, cap) -> sum + cap);
+        String testTrainId = "TRN-1234";
+        String testCargoCode = "PET-AB";
 
-        System.out.println("Individual Bogie Capacities: " + capacities);
-        System.out.println("Total Seating Capacity of the Train: " + totalSeats);
+        boolean isTrainIdValid = Pattern.matches(trainIdPattern, testTrainId);
+        boolean isCargoValid = Pattern.matches(cargoCodePattern, testCargoCode);
 
-        System.out.println("\nUC10 total capacity calculation completed...");
+        System.out.println("Train ID [" + testTrainId + "] Valid: " + isTrainIdValid);
+        System.out.println("Cargo Code [" + testCargoCode + "] Valid: " + isCargoValid);
+
+        // Negative Test
+        System.out.println("Train ID [TRAIN12] Valid: " + Pattern.matches(trainIdPattern, "TRAIN12"));
+
+        System.out.println("\nUC11 regex validation completed...");
     }
 }
