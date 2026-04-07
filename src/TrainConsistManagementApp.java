@@ -1,31 +1,33 @@
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
- * UC4: Maintain Ordered Bogie IDs
- * This implementation uses TreeSet to ensure bogie IDs are stored
- * and displayed in sorted order. [cite: 4]
+ * UC6: Map Bogie to Capacity
+ * This implementation uses HashMap to store Bogie ID as a Key
+ * and its Capacity as a Value.
  */
 public class TrainConsistManagementApp {
     public static void main(String[] args) {
         System.out.println("========================================");
-        System.out.println(" UC4 - Maintain Ordered Bogie IDs ");
+        System.out.println(" UC6 - Map Bogie to Capacity ");
         System.out.println("========================================\n");
 
-        // TreeSet automatically sorts elements in natural ascending order
-        Set<String> bogies = new TreeSet<>();
+        // HashMap stores Key-Value pairs
+        Map<String, Integer> bogieCapacity = new HashMap<>();
 
-        // Adding IDs in random order [cite: 4]
-        bogies.add("BG104");
-        bogies.add("BG101");
-        bogies.add("BG103");
-        bogies.add("BG102");
+        // Mapping Bogie IDs to their respective capacities
+        bogieCapacity.put("BG101", 72); // Sleeper Class
+        bogieCapacity.put("BG102", 54); // AC Chair Car
+        bogieCapacity.put("BG103", 24); // First Class
+        bogieCapacity.put("BG104", 72);
 
-        // Displaying the set [cite: 4]
-        System.out.println("Bogie IDs in Sorted Order:");
-        System.out.println(bogies);
+        System.out.println("Bogie ID -> Seating Capacity:");
+        // Iterating through the map to display data
+        for (Map.Entry<String, Integer> entry : bogieCapacity.entrySet()) {
+            System.out.println("Bogie: " + entry.getKey() + " | Capacity: " + entry.getValue());
+        }
 
-        System.out.println("\nNote: TreeSet maintains elements in ascending order.");
-        System.out.println("UC4 ordered validation completed...");
+        System.out.println("\nNote: HashMap allows quick lookup of capacity using the Bogie ID.");
+        System.out.println("UC6 mapping validation completed...");
     }
 }
