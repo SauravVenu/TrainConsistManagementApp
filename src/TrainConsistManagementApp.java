@@ -1,28 +1,25 @@
-class CargoSafetyException extends Exception {
-    public CargoSafetyException(String message) { super(message); }
-}
+import java.util.Arrays;
 
 public class TrainConsistManagementApp {
-    public static void assignCargo(String type, String cargo) throws CargoSafetyException {
-        if (type.equals("Rectangular") && cargo.equals("Petroleum")) {
-            throw new CargoSafetyException("Safety Violation: Petroleum cannot be carried in Rectangular bogies!");
-        }
-        System.out.println("Cargo '" + cargo + "' successfully assigned to " + type + " bogie.");
-    }
-
     public static void main(String[] args) {
-        System.out.println("--- UC15: Safe Cargo Assignment ---\n");
-        String[][] tasks = {{"Cylindrical", "Petroleum"}, {"Rectangular", "Petroleum"}};
+        System.out.println("--- UC16: Bubble Sort (Manual Sorting) ---\n");
+        int[] capacities = {72, 56, 24, 70, 60};
+        int n = capacities.length;
 
-        for (String[] task : tasks) {
-            try {
-                assignCargo(task[0], task[1]);
-            } catch (CargoSafetyException e) {
-                System.err.println("Error: " + e.getMessage());
-            } finally {
-                System.out.println("Validation check completed for: " + task[0]);
+        System.out.println("Before Sorting: " + Arrays.toString(capacities));
+
+        // Bubble Sort Algorithm
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (capacities[j] > capacities[j + 1]) {
+                    // Swap elements
+                    int temp = capacities[j];
+                    capacities[j] = capacities[j + 1];
+                    capacities[j + 1] = temp;
+                }
             }
-            System.out.println();
         }
+
+        System.out.println("After Sorting:  " + Arrays.toString(capacities));
     }
 }
