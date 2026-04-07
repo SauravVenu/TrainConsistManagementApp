@@ -1,25 +1,20 @@
-public class TrainConsistManagementApp {
-    public static boolean safeSearch(String[] bogies, String key) {
-        if (bogies == null || bogies.length == 0) {
-            throw new IllegalStateException("Search Failed: No bogies present in the train consist!");
-        }
-        for (String b : bogies) {
-            if (b.equals(key)) return true;
-        }
-        return false;
-    }
+import java.util.ArrayList;
+import java.util.List;
 
-    public static void main(String[] args) {
-        System.out.println("--- UC20: Fail-Fast Search Validation ---\n");
-        String[] emptyTrain = {};
+public class  {
 
-        try {
-            System.out.println("Searching empty train...");
-            safeSearch(emptyTrain, "BG101");
-        } catch (IllegalStateException e) {
-            System.err.println("Caught Expected Exception: " + e.getMessage());
-        }
+public static void main(String[] args) {
 
-        System.out.println("\nUC20 search validation completed.");
-    }
+    // Welcome message
+    System.out.println("=== Train Consist Management App ===");
+
+    // Initialize empty consist (list of bogies)
+    List<String> consist = new ArrayList<>();
+
+    // Display initial bogie count
+    System.out.println("Train consist initialized.");
+    System.out.println("Initial number of bogies: " + consist.size());
+
+    // Program continues...
+}
 }
