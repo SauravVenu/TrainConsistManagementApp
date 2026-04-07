@@ -1,29 +1,39 @@
-import java.util.ArrayList;
-import java.util.List;
+// Custom Exception Class
+class InvalidCapacityException extends Exception {
+    public InvalidCapacityException(String message) {
+        super(message);
+    }
+}
+
+class PassengerBogie {
+    String type;
+    int capacity;
+
+    PassengerBogie(String type, int capacity) throws InvalidCapacityException {
+        if (capacity <= 0) {
+            throw new InvalidCapacityException("Capacity must be greater than zero for " + type);
+        }
+        this.type = type;
+        this.capacity = capacity;
+    }
+}
 
 public class TrainConsistManagementApp {
     public static void main(String[] args) {
-        System.out.println("--- UC13: Performance Comparison ---\n");
+        System.out.println("--- UC14: Custom Exception Handling ---\n");
 
-        List<Integer> capacities = new ArrayList<>();
-        for (int i = 0; i < 100000; i++) capacities.add((int) (Math.random() * 100));
+        try {
+            System.out.println("Attempting to create valid bogie...");
+            new PassengerBogie("Sleeper", 72);
+            System.out.println("Success!");
 
-        // 1. Loop Performance
-        long startLoop = System.nanoTime();
-        List<Integer> filteredLoop = new ArrayList<>();
-        for (int c : capacities) {
-            if (c > 60) filteredLoop.add(c);
+            System.out.println("\nAttempting to create invalid bogie...");
+            new PassengerBogie("AC Chair", -10); // This will trigger the exception
+
+        } catch (InvalidCapacityException e) {
+            System.err.println("Caught Exception: " + e.getMessage());
         }
-        long endLoop = System.nanoTime();
 
-        // 2. Stream Performance
-        long startStream = System.nanoTime();
-        long count = capacities.stream().filter(c -> c > 60).count();
-        long endStream = System.nanoTime();
-
-        System.out.println("Loop Time: " + (endLoop - startLoop) + " ns");
-        System.out.println("Stream Time: " + (endStream - startStream) + " ns");
-
-        System.out.println("\nUC13 benchmarking completed...");
+        System.out.println("\nUC14 exception handling validation completed...");
     }
 }
