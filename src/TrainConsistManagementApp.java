@@ -1,50 +1,31 @@
-import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 /**
- * =====================================================================
- * MAIN CLASS - TrainConsistManagementApp
- * =====================================================================
- * * Use Case 3: Track Unique Bogie IDs
- * * Description:
- * This class ensures that duplicate bogie IDs are not
- * added into the train formation using HashSet.
- * * At this stage, the application:
- * - Stores bogie IDs
- * - Prevents duplicates automatically
- * - Displays unique bogie identifiers
- * * This maps uniqueness validation using Set.
- * * @author Developer
- * @version 3.0
+ * UC4: Maintain Ordered Bogie IDs
+ * This implementation uses TreeSet to ensure bogie IDs are stored
+ * and displayed in sorted order. [cite: 4]
  */
 public class TrainConsistManagementApp {
-
     public static void main(String[] args) {
         System.out.println("========================================");
-        System.out.println(" UC3 - Track Unique Bogie IDs ");
+        System.out.println(" UC4 - Maintain Ordered Bogie IDs ");
         System.out.println("========================================\n");
-        // Create a Set to store unique bogie IDs [cite: 33]
-        // HashSet stores only unique values and uses hashing for fast access [cite: 26, 28]
-        Set<String> bogies = new HashSet<>();
 
-        // ---- ADD IDs (including duplicates) ----
-        // add() inserts bogie IDs into the set [cite: 29]
-        bogies.add("BG101");
-        bogies.add("BG102");
-        bogies.add("BG103");
+        // TreeSet automatically sorts elements in natural ascending order
+        Set<String> bogies = new TreeSet<>();
+
+        // Adding IDs in random order [cite: 4]
         bogies.add("BG104");
+        bogies.add("BG101");
+        bogies.add("BG103");
+        bogies.add("BG102");
 
-        // Duplicate entries will be ignored internally by HashSet [cite: 23, 30]
-        bogies.add("BG101"); // Duplicate entry [cite: 34]
-        bogies.add("BG102"); // Duplicate entry [cite: 34]
-
-        // Display the results [cite: 35]
-        System.out.println("Bogie IDs After Insertion:");
+        // Displaying the set [cite: 4]
+        System.out.println("Bogie IDs in Sorted Order:");
         System.out.println(bogies);
 
-        System.out.println("\nNote:");
-        System.out.println("Duplicates are automatically ignored by HashSet.");
-
-        System.out.println("\nUC3 uniqueness validation completed...");
+        System.out.println("\nNote: TreeSet maintains elements in ascending order.");
+        System.out.println("UC4 ordered validation completed...");
     }
 }
