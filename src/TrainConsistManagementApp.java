@@ -1,24 +1,22 @@
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 public class TrainConsistManagementApp {
     public static void main(String[] args) {
         System.out.println("========================================");
-        System.out.println(" UC9 - Group Bogies by Type ");
+        System.out.println(" UC10 - Count Total Seats ");
         System.out.println("========================================\n");
 
-        List<String> bogies = Arrays.asList("Passenger_S1", "Goods_G1", "Passenger_A1", "Goods_G2", "Passenger_B1");
+        // List representing seat capacities of various bogies
+        List<Integer> capacities = Arrays.asList(72, 54, 24, 72, 64);
 
-        // Grouping logic based on the prefix of the string
-        Map<String, List<String>> groupedBogies = bogies.stream()
-                .collect(Collectors.groupingBy(b -> b.split("_")[0]));
+        // Use reduce to calculate the sum of all capacities
+        int totalSeats = capacities.stream()
+                .reduce(0, (sum, cap) -> sum + cap);
 
-        groupedBogies.forEach((type, list) -> {
-            System.out.println(type + " Bogies: " + list);
-        });
+        System.out.println("Individual Bogie Capacities: " + capacities);
+        System.out.println("Total Seating Capacity of the Train: " + totalSeats);
 
-        System.out.println("\nUC9 grouping validation completed...");
+        System.out.println("\nUC10 total capacity calculation completed...");
     }
 }
