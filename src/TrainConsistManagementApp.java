@@ -1,24 +1,25 @@
 public class TrainConsistManagementApp {
-    public static int binarySearch(String[] arr, String key) {
-        int low = 0, high = arr.length - 1;
-        while (low <= high) {
-            int mid = low + (high - low) / 2;
-            int res = key.compareTo(arr[mid]);
-
-            if (res == 0) return mid;
-            if (res > 0) low = mid + 1;
-            else high = mid - 1;
+    public static boolean safeSearch(String[] bogies, String key) {
+        if (bogies == null || bogies.length == 0) {
+            throw new IllegalStateException("Search Failed: No bogies present in the train consist!");
         }
-        return -1;
+        for (String b : bogies) {
+            if (b.equals(key)) return true;
+        }
+        return false;
     }
 
     public static void main(String[] args) {
-        System.out.println("--- UC19: Binary Search (O(log n)) ---\n");
-        // Pre-sorted array is a requirement
-        String[] sortedBogies = {"BG101", "BG205", "BG309", "BG412", "BG550"};
-        String target = "BG412";
+        System.out.println("--- UC20: Fail-Fast Search Validation ---\n");
+        String[] emptyTrain = {};
 
-        int result = binarySearch(sortedBogies, target);
-        System.out.println("Bogie " + target + (result != -1 ? " found at index " + result : " not found."));
+        try {
+            System.out.println("Searching empty train...");
+            safeSearch(emptyTrain, "BG101");
+        } catch (IllegalStateException e) {
+            System.err.println("Caught Expected Exception: " + e.getMessage());
+        }
+
+        System.out.println("\nUC20 search validation completed.");
     }
 }
