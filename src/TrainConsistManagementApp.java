@@ -1,39 +1,23 @@
-import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.Arrays;
 import java.util.List;
-
-class Bogie {
-    String id;
-    int capacity;
-
-    Bogie(String id, int capacity) {
-        this.id = id;
-        this.capacity = capacity;
-    }
-
-    @Override
-    public String toString() {
-        return id + " (Capacity: " + capacity + ")";
-    }
-}
+import java.util.stream.Collectors;
 
 public class TrainConsistManagementApp {
     public static void main(String[] args) {
         System.out.println("========================================");
-        System.out.println(" UC7 - Sort Bogies by Capacity ");
+        System.out.println(" UC8 - Filter Passenger Bogies ");
         System.out.println("========================================\n");
 
-        List<Bogie> train = new ArrayList<>();
-        train.add(new Bogie("BG101", 72));
-        train.add(new Bogie("BG102", 24));
-        train.add(new Bogie("BG103", 54));
+        List<String> allBogies = Arrays.asList("Passenger_S1", "Goods_G1", "Passenger_A1", "Goods_G2");
 
-        // Sort using Comparator (ascending order of capacity)
-        train.sort(Comparator.comparingInt(b -> b.capacity));
+        // Use Streams to filter IDs starting with "Passenger"
+        List<String> passengerBogies = allBogies.stream()
+                .filter(b -> b.startsWith("Passenger"))
+                .collect(Collectors.toList());
 
-        System.out.println("Bogies Sorted by Capacity:");
-        train.forEach(System.out::println);
+        System.out.println("Filtered Passenger Bogies:");
+        passengerBogies.forEach(System.out::println);
 
-        System.out.println("\nUC7 sorting validation completed...");
+        System.out.println("\nUC8 stream filtering completed...");
     }
 }
