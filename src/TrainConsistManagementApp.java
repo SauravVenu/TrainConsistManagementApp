@@ -1,29 +1,35 @@
-import java.util.regex.Pattern;
+import java.util.Arrays;
+import java.util.List;
+
+class GoodsBogie {
+    String type; // "Cylindrical" or "Box"
+    String cargo;
+
+    GoodsBogie(String type, String cargo) {
+        this.type = type;
+        this.cargo = cargo;
+    }
+}
 
 public class TrainConsistManagementApp {
     public static void main(String[] args) {
         System.out.println("========================================");
-        System.out.println(" UC11 - Validate Train ID & Cargo Codes ");
+        System.out.println(" UC12 - Safety Compliance Check ");
         System.out.println("========================================\n");
 
-        // Regex Patterns
-        // TRN- followed by exactly 4 digits
-        String trainIdPattern = "^TRN-\\d{4}$";
-        // 3 Uppercase letters, hyphen, 2 Uppercase letters
-        String cargoCodePattern = "^[A-Z]{3}-[A-Z]{2}$";
+        List<GoodsBogie> train = Arrays.asList(
+                new GoodsBogie("Cylindrical", "Petroleum"),
+                new GoodsBogie("Box", "Coal"),
+                new GoodsBogie("Cylindrical", "Petroleum")
+        );
 
-        String testTrainId = "TRN-1234";
-        String testCargoCode = "PET-AB";
+        // Safety Rule: If type is Cylindrical, cargo MUST be Petroleum
+        boolean isSafe = train.stream().allMatch(b ->
+                !(b.type.equals("Cylindrical")) || b.cargo.equals("Petroleum")
+        );
 
-        boolean isTrainIdValid = Pattern.matches(trainIdPattern, testTrainId);
-        boolean isCargoValid = Pattern.matches(cargoCodePattern, testCargoCode);
+        System.out.println("Is the train formation safe? " + (isSafe ? "YES" : "NO"));
 
-        System.out.println("Train ID [" + testTrainId + "] Valid: " + isTrainIdValid);
-        System.out.println("Cargo Code [" + testCargoCode + "] Valid: " + isCargoValid);
-
-        // Negative Test
-        System.out.println("Train ID [TRAIN12] Valid: " + Pattern.matches(trainIdPattern, "TRAIN12"));
-
-        System.out.println("\nUC11 regex validation completed...");
+        System.out.println("\nUC12 safety validation completed...");
     }
 }
